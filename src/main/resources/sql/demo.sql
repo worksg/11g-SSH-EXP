@@ -27,3 +27,12 @@ CREATE TABLE `Score` (
     `grade`  INT, -- 成绩
    PRIMARY KEY (`sno`,`cno`)
 );
+
+INSERT INTO `studev`.`student` (`sno`, `sname`, `ssex`, `sbirthday`, `speciality`, `sclass`, `tc`) VALUES ('0001', 'TEST1', '男', '2018-12-14', 'math', '001', '100');
+INSERT INTO `studev`.`student` (`sno`, `sname`, `ssex`, `sbirthday`, `speciality`, `sclass`, `tc`) VALUES ('0002', 'TEST2', '男', '2018-12-15', 'english', '002', '102');
+INSERT INTO `studev`.`student` (`sno`, `sname`, `ssex`, `sbirthday`, `speciality`, `sclass`, `tc`) VALUES ('0003', 'TEST3', '女', '2018-12-16', 'computer', '003', '103');
+INSERT INTO `studev`.`student` (`sno`, `sname`, `ssex`, `sbirthday`, `speciality`, `sclass`, `tc`) VALUES ('0004', 'TEST4', '女', '2018-12-17', 'language', '004', '104');
+INSERT INTO `studev`.`student` (`sno`, `sname`, `ssex`, `sbirthday`, `speciality`, `sclass`, `tc`) VALUES ('0005', 'TEST5', '女', '2018-12-18', 'physical', '005', '105');
+INSERT INTO `studev`.`student` (`sno`, `sname`, `ssex`, `sbirthday`, `speciality`, `sclass`, `tc`) VALUES ('0006', 'TEST6', '女', '2018-12-19', 'music', '006', '106');
+
+

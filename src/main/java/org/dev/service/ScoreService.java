@@ -1,4 +1,13 @@
 package org.dev.service;
 
-public interface ScoreService {
+import java.util.List;
+
+import org.dev.entity.Score;
+
+public interface ScoreService extends BaseService<Score, String> {
+	void addScore(Score s) throws Exception;
+	void deleteScore(String sno) throws Exception;
+	void updateScore(Score s) throws Exception;
+	Score getOneScore(String sno) throws Exception;
+	List<Score> getAllScore() throws Exception;
 }

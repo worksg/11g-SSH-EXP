@@ -1,4 +1,6 @@
 package org.dev.dao;
 
-public interface UsersDao {
+import java.io.Serializable;
+
+public interface UsersDao<T, ID extends Serializable> extends BaseDao<T, ID> {
 }

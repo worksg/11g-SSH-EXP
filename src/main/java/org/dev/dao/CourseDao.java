@@ -1,4 +1,7 @@
 package org.dev.dao;
 
-public interface CourseDao {
+import java.io.Serializable;
+
+public interface CourseDao<T, ID extends Serializable> extends BaseDao<T, ID> {
+	
 }
