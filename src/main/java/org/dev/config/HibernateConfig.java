@@ -27,10 +27,10 @@ public class HibernateConfig {
 		factoryBean.setDataSource(dataSource());
 		factoryBean.setPackagesToScan("org.dev.entity");
 		Properties prop = new Properties();
-		prop.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-		prop.setProperty("hibernate.show_sql", "true");
-		prop.setProperty("hibernate.hbm2ddl.auto", "update");
-		prop.setProperty("hibernate.format_sql", "false");
+		prop.setProperty("hibernate.dialect",env.getProperty("hibernate.dialect"));
+		prop.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+		prop.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+		prop.setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
 		factoryBean.setHibernateProperties(prop);
 		return factoryBean;
 	}
