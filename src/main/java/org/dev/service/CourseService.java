@@ -6,9 +6,9 @@ import java.util.List;
 import org.dev.entity.Course;
 
 public interface CourseService extends BaseService<Course, String> {
-	void addCourse(Course s) throws Exception;
-	void deleteCourse(String sno) throws Exception;
-	void updateCourse(Course s) throws Exception;
-	Course getOneCourse(String sno) throws Exception;
+	void addCourse(Course c) throws Exception;
+	void deleteCourse(String cno) throws Exception;
+	void updateCourse(Course c) throws Exception;
+	Course getOneCourse(String cno) throws Exception;
 	List<Course> getAllCourse() throws Exception;
 }

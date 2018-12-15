@@ -21,11 +21,11 @@ public class CourseDaoImpl extends BaseDaoImpl<Course, String> implements Course
 
 	@Override
 	public void delete(String cno) {
-		this.getSession().createQuery("delete course where cno=?").setParameter(0, cno).executeUpdate();
+		this.getSession().createQuery("delete Course where cno=?0").setParameter(0, cno).executeUpdate();
 	}
 
 	@Override
 	public Course get(String cno) {
-		return (Course) this.getSession().createQuery("from course where cno=?").setParameter(0, cno).uniqueResult();
+		return (Course) this.getSession().createQuery("from Course where cno=?0").setParameter(0, cno).uniqueResult();
 	}
 }

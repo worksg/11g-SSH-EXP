@@ -56,8 +56,7 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public ModelAndView updateStudentPage(@Valid @ModelAttribute("Student") Student student,
-			@RequestParam(value = "id") String id) throws Exception {
+	public ModelAndView updateStudentPage(@RequestParam(value = "id") String id) throws Exception {
 		ModelAndView mav = new ModelAndView("updateStudent");
 		mav.addObject("Student", usersService.getOneStudent(id));
 		return mav;

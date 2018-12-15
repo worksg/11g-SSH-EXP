@@ -14,23 +14,23 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, String> implement
 	public CourseDao courseDAO;
 
 	@Override
-	public void addCourse(Course s) throws Exception {
-		courseDAO.save(s);
+	public void addCourse(Course c) throws Exception {
+		courseDAO.save(c);
 	}
 
 	@Override
-	public void deleteCourse(String sno) throws Exception {
-		courseDAO.delete(sno);
+	public void deleteCourse(String cno) throws Exception {
+		courseDAO.delete(cno);
 	}
 
 	@Override
-	public void updateCourse(Course s) throws Exception {
-		courseDAO.update(s);
+	public void updateCourse(Course c) throws Exception {
+		courseDAO.update(c);
 	}
 
 	@Override
-	public Course getOneCourse(String sno) throws Exception {
-		return courseDAO.get(sno);
+	public Course getOneCourse(String cno) throws Exception {
+		return courseDAO.get(cno);
 	}
 
 	@Override

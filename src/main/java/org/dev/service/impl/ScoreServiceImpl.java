@@ -19,8 +19,8 @@ public class ScoreServiceImpl extends BaseServiceImpl<Score, String> implements 
 	}
 
 	@Override
-	public void deleteScore(String sno) throws Exception {
-		scoreDAO.delete(sno);
+	public void deleteScore(String sno, String cno) throws Exception {
+		scoreDAO.delete(sno, cno);
 	}
 
 	@Override
@@ -29,8 +29,8 @@ public class ScoreServiceImpl extends BaseServiceImpl<Score, String> implements 
 	}
 
 	@Override
-	public Score getOneScore(String sno) throws Exception {
-		return scoreDAO.get(sno);
+	public Score getOneScore(String sno, String cno) throws Exception {
+		return scoreDAO.get(sno, cno);
 	}
 
 	@Override

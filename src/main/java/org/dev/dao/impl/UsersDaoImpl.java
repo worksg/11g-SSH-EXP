@@ -21,12 +21,12 @@ public class UsersDaoImpl extends BaseDaoImpl<Student, String> implements UsersD
 
 	@Override
 	public void delete(String sno) {
-		this.getSession().createQuery("delete student where sno=?0").setParameter(0, sno).executeUpdate();
+		this.getSession().createQuery("delete Student where sno=?0").setParameter(0, sno).executeUpdate();
 	}
 
 	@Override
 	public Student get(String sno) {
-		return (Student) this.getSession().createQuery("from student where sno=?0").setParameter(0, sno).uniqueResult();
+		return (Student) this.getSession().createQuery("from Student where sno=?0").setParameter(0, sno).uniqueResult();
 	}
     
 }
