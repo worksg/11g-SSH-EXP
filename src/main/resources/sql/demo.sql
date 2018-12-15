@@ -1,4 +1,4 @@
-CREATE DATABASE `studev` DEFAULT CHARACTER SET utf8 COLLATE utf8mb4_general_ci;
+CREATE DATABASE `studev` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- set character_set_server = 'utf8';
 -- show variables like 'character%';
