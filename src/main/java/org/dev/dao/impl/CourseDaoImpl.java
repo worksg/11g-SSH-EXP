@@ -10,7 +10,7 @@ import org.dev.entity.Course;
 
 @Transactional
 @Repository
-public class CourseDaoImpl extends BaseDaoImpl<Course, String> implements CourseDao<Course, String> {
+public class CourseDaoImpl extends BaseDaoImpl<Course, String> implements CourseDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -20,12 +20,12 @@ public class CourseDaoImpl extends BaseDaoImpl<Course, String> implements Course
 	}
 
 	@Override
-	public void delete(String id) {
-		this.getSession().createQuery("delete course where id=?").setParameter(0, id).executeUpdate();
+	public void delete(String cno) {
+		this.getSession().createQuery("delete course where cno=?").setParameter(0, cno).executeUpdate();
 	}
 
 	@Override
-	public Course get(String id) {
-		return (Course) this.getSession().createQuery("from course where id=?").setParameter(0, id).uniqueResult();
+	public Course get(String cno) {
+		return (Course) this.getSession().createQuery("from course where cno=?").setParameter(0, cno).uniqueResult();
 	}
 }

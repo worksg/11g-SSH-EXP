@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class UsersServiceImpl extends BaseServiceImpl<Student, String> implements UsersService {
 
 	@Autowired
-    public UsersDao<Student, String> usersDAO;
+	public UsersDao usersDAO;
 
 	@Override
 	public void addStudent(Student s) throws Exception {

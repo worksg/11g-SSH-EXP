@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CourseServiceImpl extends BaseServiceImpl<Course, String> implements CourseService {
 	@Autowired
-	public CourseDao<Course, String> courseDAO;
+	public CourseDao courseDAO;
 
 	@Override
 	public void addCourse(Course s) throws Exception {

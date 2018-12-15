@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ScoreServiceImpl extends BaseServiceImpl<Score, String> implements ScoreService {
 	@Autowired
-    public ScoreDao<Score, String> scoreDAO;
+	public ScoreDao scoreDAO;
 
 	@Override
 	public void addScore(Score s) throws Exception {

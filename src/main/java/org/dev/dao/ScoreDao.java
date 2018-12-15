@@ -1,6 +1,9 @@
 package org.dev.dao;
 
-import java.io.Serializable;
+import org.dev.entity.Score;
 
-public interface ScoreDao<T, ID extends Serializable> extends BaseDao<T, ID> {
+public interface ScoreDao extends BaseDao<Score, String> {
+
+	Score get(String sno, String cno);
+	void delete(String sno, String cno);
 }

@@ -1,7 +1,6 @@
 package org.dev.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import javax.servlet.Filter;
 
@@ -31,6 +30,8 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
 		characterEncodingFilter.setEncoding("UTF-8");
 		characterEncodingFilter.setForceEncoding(true);
-		return new Filter[] { new HiddenHttpMethodFilter(), characterEncodingFilter };
+		return new Filter[] { characterEncodingFilter };
+		// 删除 new HiddenHttpMethodFilter(), 否则中文编码有问题
 	}
+	
 }

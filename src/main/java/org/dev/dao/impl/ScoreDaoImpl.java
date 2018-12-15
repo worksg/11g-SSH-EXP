@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Repository
-public class ScoreDaoImpl extends BaseDaoImpl<Score, String> implements ScoreDao<Score, String> {
+public class ScoreDaoImpl extends BaseDaoImpl<Score, String> implements ScoreDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -20,12 +20,23 @@ public class ScoreDaoImpl extends BaseDaoImpl<Score, String> implements ScoreDao
 	}
 
 	@Override
+	public void delete(String sno, String cno) {
+		this.getSession().createQuery("delete score where sno=?0 and cno?=1").setParameter(0, sno).setParameter(1, cno)
+				.executeUpdate();
+	}
+
+	@Override
+	public Score get(String sno, String cno) {
+		return (Score) this.getSession().createQuery("from score where sno=?0 and cno?=1").setParameter(0, sno)
+				.setParameter(1, cno).uniqueResult();
+	}
+
+	@Override
 	public void delete(String id) {
-		this.getSession().createQuery("delete score where id=?").setParameter(0, id).executeUpdate();
 	}
 
 	@Override
 	public Score get(String id) {
-		return (Score) this.getSession().createQuery("from score where id=?").setParameter(0, id).uniqueResult();
+		return null;
 	}
 }

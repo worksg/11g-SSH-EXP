@@ -31,6 +31,9 @@ public class HibernateConfig {
 		prop.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
 		prop.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 		prop.setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
+		prop.setProperty("hibernate.connection.characterEncoding", env.getProperty("hibernate.connection.characterEncoding"));
+		prop.setProperty("hibernate.connection.CharSet", env.getProperty("hibernate.connection.CharSet"));
+		prop.setProperty("hibernate.connection.useUnicode", env.getProperty("hibernate.connection.useUnicode"));
 		factoryBean.setHibernateProperties(prop);
 		return factoryBean;
 	}

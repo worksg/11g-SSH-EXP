@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Student implements Serializable {
@@ -14,7 +18,11 @@ public class Student implements Serializable {
     private String sno;
     private String sname;
     private String ssex;
+    
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date sbirthday;
+    
     private String speciality;
     private String sclass;
     private Integer tc;

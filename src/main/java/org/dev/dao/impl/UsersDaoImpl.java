@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Repository
-public class UsersDaoImpl extends BaseDaoImpl<Student, String> implements UsersDao<Student,String> {
+public class UsersDaoImpl extends BaseDaoImpl<Student, String> implements UsersDao {
 	
 	@Autowired
     private SessionFactory sessionFactory;
@@ -20,13 +20,13 @@ public class UsersDaoImpl extends BaseDaoImpl<Student, String> implements UsersD
     }
 
 	@Override
-	public void delete(String id) {
-		this.getSession().createQuery("delete student where id=?").setParameter(0, id).executeUpdate();
+	public void delete(String sno) {
+		this.getSession().createQuery("delete student where sno=?0").setParameter(0, sno).executeUpdate();
 	}
 
 	@Override
-	public Student get(String id) {
-		return (Student) this.getSession().createQuery("from student where id=?").setParameter(0, id).uniqueResult();
+	public Student get(String sno) {
+		return (Student) this.getSession().createQuery("from student where sno=?0").setParameter(0, sno).uniqueResult();
 	}
     
 }

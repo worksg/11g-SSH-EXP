@@ -1,4 +1,8 @@
-CREATE DATABASE `studev` /*!40100 COLLATE 'utf8mb4_general_ci' */;
+CREATE DATABASE `studev` DEFAULT CHARACTER SET utf8 COLLATE utf8mb4_general_ci;
+
+-- set character_set_server = 'utf8';
+-- show variables like 'character%';
+-- show variables like 'collation%';
 
 USE `studev`;
 
@@ -28,7 +32,7 @@ CREATE TABLE `Score` (
    PRIMARY KEY (`sno`,`cno`)
 );
 
-INSERT INTO `studev`.`student` (`sno`, `sname`, `ssex`, `sbirthday`, `speciality`, `sclass`, `tc`) VALUES ('0001', 'TEST1', '男', '2018-12-14', 'math', '001', '100');
+INSERT INTO `studev`.`student` (`sno`, `sname`, `ssex`, `sbirthday`, `speciality`, `sclass`, `tc`) VALUES ('0001', 'TEST1', '男', '2018-12-14', 'math', '001', '101');
 INSERT INTO `studev`.`student` (`sno`, `sname`, `ssex`, `sbirthday`, `speciality`, `sclass`, `tc`) VALUES ('0002', 'TEST2', '男', '2018-12-15', 'english', '002', '102');
 INSERT INTO `studev`.`student` (`sno`, `sname`, `ssex`, `sbirthday`, `speciality`, `sclass`, `tc`) VALUES ('0003', 'TEST3', '女', '2018-12-16', 'computer', '003', '103');
 INSERT INTO `studev`.`student` (`sno`, `sname`, `ssex`, `sbirthday`, `speciality`, `sclass`, `tc`) VALUES ('0004', 'TEST4', '女', '2018-12-17', 'language', '004', '104');
