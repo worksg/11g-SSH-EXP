@@ -90,62 +90,29 @@
 						<div class="col">
 							<div class="card">
 								<div class="card-body">
-									<h3 class="card-title">修改学生信息</h3>
-									<form:form id="updateStudentForm" modelAttribute="Student"
-										method="post">
-										<div class="form-group">
-											<form:label path="sno">学号</form:label>
-											<form:input type="text" class="form-control" path="sno" />
+									<h3 class="card-title">查询学生信息</h3>
+									<!-- <form> -->
+									<div class="input-group col">
+										<div class="input-group-prepend bg-primary border-primary">
+											<span class="input-group-text bg-transparent text-white">
+												学生学号 </span>
 										</div>
-										<div class="form-group">
-											<form:label path="sname">姓名</form:label>
-											<form:input type="text" class="form-control" path="sname" />
-										</div>
-										<div class="form-group">
-											<div class="row">
-												<div class="col">
-													<form:label path="ssex">性别</form:label>
-												</div>
-												<div class="col">
-													<div class="custom-control custom-radio">
-														<form:radiobutton class="custom-control-input"
-															id="Radios1" path="ssex" value="男" />
-														<label class="custom-control-label" for="Radios1">
-															男</label>
-													</div>
-												</div>
-												<div class="col">
-													<div class="custom-control custom-radio">
-														<form:radiobutton class="custom-control-input"
-															id="Radios2" path="ssex" value="女" />
-														<label class="custom-control-label" for="Radios2">
-															女 </label>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="form-group">
-											<form:label path="sbirthday">出生时间[YYYY-MM-DD]</form:label>
-											<form:input type="text" class="form-control" path="sbirthday" />
-										</div>
-										<div class="form-group">
-											<form:label path="speciality">专业</form:label>
-											<form:input type="text" class="form-control"
-												path="speciality" />
-										</div>
-										<div class="form-group">
-											<form:label path="sclass">班号</form:label>
-											<form:input type="text" class="form-control" path="sclass" />
-										</div>
-										<div class="form-group">
-											<form:label path="tc">总学分</form:label>
-											<form:input type="text" class="form-control" path="tc" />
-										</div>
-										<div class="col d-flex justify-content-center">
-											<form:button type="submit" class="btn btn-primary btn-block">修改</form:button>
-										</div>
-									</form:form>
+										<input type="text" name="id" class="form-control"
+											placeholder="输入学号" id="searchID"> <span
+											class="input-group-append">
+											<button class="btn btn-info" type="button" id="searchButton">Search</button>
+										</span>
+									</div>
+									<!-- </form> -->
 								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col">
+							<div class="card" id="content-panel" style="display: none;">
+								<div class="card-body"></div>
 							</div>
 						</div>
 					</div>
@@ -159,6 +126,16 @@
 		src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"
 		async defer></script>
 	<!-- User Defined Script BEGIN -->
+	<script>
+        $("#searchButton").click(function () {
+            var id = $('#searchID').val()
+            $.get("<%=request.getContextPath()%>/student/list", {id : id}, function(data) {
+				console.log(data)
+				$('#content-panel .card-body').html(data)
+				$('#content-panel').show()
+			});
+		});
+	</script>
 	<!-- END -->
 </body>
 </html>

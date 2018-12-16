@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javassist.NotFoundException;
 //import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -21,22 +23,38 @@ public class StudentController {
 	@Autowired
 	public UsersService usersService;
 
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String StudentIndexPage(ModelMap model) throws Exception {
+		model.addAttribute("message", usersService.getAllStudent());
+		return "studentlist";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String searchStudent() {
+		return "searchStudent";
+	}
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listAllStudent(@RequestParam(value = "id", required = false) String id, ModelMap model)
 			throws Exception {
 		if (id == null) {
 			model.addAttribute("message", usersService.getAllStudent());
+			return "studentlist";
 		} else {
-			model.addAttribute("message", usersService.getOneStudent(id));
+			Student item = usersService.getOneStudent(id);
+			if (item != null) {
+				model.addAttribute("item", item);
+				return "studentTable";
+			}else {
+				throw new NotFoundException("");
+			}
 		}
-		return "studentlist";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView addStudent(@Valid @ModelAttribute("Student") Student student) throws Exception {
 		usersService.addStudent(student);
-		ModelAndView mav = new ModelAndView("studentlist");
-		mav.addObject("message", usersService.getAllStudent());
+		ModelAndView mav = new ModelAndView("redirect:/student");
 		return mav;
 	}
 
@@ -50,8 +68,7 @@ public class StudentController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public ModelAndView updateStudent(@Valid @ModelAttribute("Student") Student student) throws Exception {
 		usersService.updateStudent(student);
-		ModelAndView mav = new ModelAndView("studentlist");
-		mav.addObject("message", usersService.getAllStudent());
+		ModelAndView mav = new ModelAndView("redirect:/student");
 		return mav;
 	}
 
@@ -62,11 +79,10 @@ public class StudentController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public ModelAndView deleteStudent(@RequestParam(value = "id") String id) throws Exception {
 		usersService.deleteStudent(id);
-		ModelAndView mav = new ModelAndView("studentlist");
-		mav.addObject("message", usersService.getAllStudent());
+		ModelAndView mav = new ModelAndView("redirect:/student");
 		return mav;
 	}
 }
