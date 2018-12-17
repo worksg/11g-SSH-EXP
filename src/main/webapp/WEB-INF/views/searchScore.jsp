@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +13,6 @@
 	href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css">
 <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
 </head>
-
 <body>
 	<div class="container-scroller">
 		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -84,72 +83,72 @@
 			</div>
 		</nav>
 
-		<div class="container-fluid page-body-wrapper">
-			<div class="main-panel">
-				<div class="content-wrapper">
-					<div class="row">
-						<div class="col">
-							<div class="card">
-								<div class="card-body">
-									<h3 class="card-title">全部成绩信息</h3>
-									<div class="table-responsive">
-										<table class="table table-bordered table-dark table-hover">
-											<thead>
-												<tr>
-													<th>#</th>
-													<th>学号</th>
-													<th>课程号</th>
-													<th>成绩</th>
-													<th>功能</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${message}" var="item" varStatus="loop">
-													<tr>
-														<td>${loop.index+1}</td>
-														<td>${item.sno}</td>
-														<td>${item.cno}</td>
-														<td>${item.grade}</td>
-														<td>
-															<div class="btn-group">
-																<form
-																	action="<%=request.getContextPath()%>/score/update">
-																	<input type="text" name="sid" value="${item.sno}" hidden />
-																	<input type="text" name="cid" value="${item.cno}" hidden />
-																	<button type="submit"
-																		class="btn btn-outline-warning btn-rounded btn-fw btn-sm">修改</button>
-																</form>
-																<form
-																	action="<%=request.getContextPath()%>/score/delete"
-																	method="post">
-																	<input type="text" name="sid" value="${item.sno}" hidden />
-																	<input type="text" name="cid" value="${item.cno}" hidden />
-																	<button type="submit"
-																		class="btn btn-outline-danger btn-rounded btn-fw btn-sm">删除</button>
-																</form>
-															</div>
-														</td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									</div>
-								</div>
+		        <div class="container-fluid page-body-wrapper">
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">查询学生信息</h3>
+                                    <!-- <form> -->
+                                    <div class="input-group col">
+                                        <div class="input-group-prepend bg-primary border-primary">
+                                            <span class="input-group-text bg-transparent text-white">
+                                                学生学号
+                                            </span>
+                                        </div>
+                                        <input type="text" name="sid" class="form-control" placeholder="输入学号" id="searchSID">
+                                        <div class="input-group-prepend bg-primary border-primary">
+                                            <span class="input-group-text bg-transparent text-white">
+                                                课程号
+                                            </span>
+                                        </div>
+                                        <input type="text" name="cid" class="form-control" placeholder="输入课程号" id="searchCID">
+
+                                        <span class="input-group-append">
+                                            <button class="btn btn-info btn-block" type="button" id="searchButton">Search</button>
+                                        </span>
+                                    </div>
+                                    <!-- <div class="col d-flex justify-content-center"> -->
+                                    <!-- </div> -->
+                                    <!-- </form> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="card" id="content-panel" style="display: none;">
+								<div class="card-body"></div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-	<script
-		src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"
-		async defer></script>
-	<!-- User Defined Script BEGIN -->
-	<!-- <script src="./main.js" async defer></script> -->
-	<!-- END -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js" async defer></script>
+    <!-- User Defined Script BEGIN -->
+    <script>
+        $("#searchButton").click(function () {
+            var sid = $('#searchSID').val().trim()
+            var cid = $('#searchCID').val().trim()
+            if (sid != "" && cid != "") {
+                $.get("<%=request.getContextPath()%>/score/list", { sid: sid, cid: cid }, function (data) {
+                    console.log(data)
+                    $('#content-panel .card-body').html(data)
+                    $('#content-panel').show()
+                }).fail(function () {
+                    $('#content-panel .card-body').html('<div class="d-flex justify-content-center"><h2>Not Found<h2></div>')
+                    $('#content-panel').show()
+                })
+            }
+        })
+    </script>
+    <!-- END -->
 </body>
-
 </html>

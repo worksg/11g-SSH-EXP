@@ -13,11 +13,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javassist.NotFoundException;
+
 @Controller
 @RequestMapping("/score")
 public class ScoreController {
 	@Autowired
 	public ScoreService scoreService;
+
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String ScoreIndexPage(ModelMap model) throws Exception {
+		model.addAttribute("message", scoreService.getAllScore());
+		return "scorelist";
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String searchScore() {
+		return "searchScore";
+	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listAllScore(@RequestParam(value = "sid", required = false) String sid,
@@ -25,7 +38,13 @@ public class ScoreController {
 		if (sid == null && cid == null) {
 			model.addAttribute("message", scoreService.getAllScore());
 		} else if (sid != null && cid != null) {
-			model.addAttribute("message", scoreService.getOneScore(sid, cid));
+			Score item = scoreService.getOneScore(sid, cid);
+			if (item != null) {
+				model.addAttribute("item", item);
+				return "scoreTable";
+			} else {
+				throw new NotFoundException("");
+			}
 		} else {
 			throw new IllegalArgumentException("The 'sid' and 'cid' parameters must not be null or empty");
 		}
@@ -35,8 +54,7 @@ public class ScoreController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView addScore(@Valid @ModelAttribute("Score") Score score) throws Exception {
 		scoreService.addScore(score);
-		ModelAndView mav = new ModelAndView("scorelist");
-		mav.addObject("message", scoreService.getAllScore());
+		ModelAndView mav = new ModelAndView("redirect:/score");
 		return mav;
 	}
 
@@ -50,8 +68,7 @@ public class ScoreController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public ModelAndView updateScore(@Valid @ModelAttribute("Score") Score score) throws Exception {
 		scoreService.updateScore(score);
-		ModelAndView mav = new ModelAndView("scorelist");
-		mav.addObject("message", scoreService.getAllScore());
+		ModelAndView mav = new ModelAndView("redirect:/score");
 		return mav;
 	}
 
@@ -63,12 +80,11 @@ public class ScoreController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public ModelAndView deleteScore(@RequestParam(value = "sid") String sid, @RequestParam(value = "cid") String cid)
 			throws Exception {
 		scoreService.deleteScore(sid, cid);
-		ModelAndView mav = new ModelAndView("scorelist");
-		mav.addObject("message", scoreService.getAllScore());
+		ModelAndView mav = new ModelAndView("redirect:/score");
 		return mav;
 	}
 }
