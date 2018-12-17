@@ -128,13 +128,18 @@
 	<!-- User Defined Script BEGIN -->
 	<script>
         $("#searchButton").click(function () {
-            var id = $('#searchID').val()
-            $.get("<%=request.getContextPath()%>/student/list", {id : id}, function(data) {
-				console.log(data)
-				$('#content-panel .card-body').html(data)
-				$('#content-panel').show()
-			});
-		});
+            var id = $('#searchID').val().trim()
+            if (id != ""){
+            	$.get("<%=request.getContextPath()%>/student/list", {id : id}, function(data) {
+    				console.log(data)
+    				$('#content-panel .card-body').html(data)
+    				$('#content-panel').show()
+    			}).fail(function () {
+                    $('#content-panel .card-body').html('<div class="d-flex justify-content-center"><h2>Not Found<h2></div>')
+                    $('#content-panel').show()
+                })	
+            }
+		})
 	</script>
 	<!-- END -->
 </body>

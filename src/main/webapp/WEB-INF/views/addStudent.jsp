@@ -54,7 +54,7 @@
 
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="javascript:;"
-						id="navbardrop" data-toggle="dropdown"> 课程模块 </a>
+						id="navbardrop" data-toggle="dropdown">课程模块 </a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/course/list">全部课程信息</a> <a
@@ -68,7 +68,7 @@
 
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="javascript:;"
-						id="navbardrop" data-toggle="dropdown"> 成绩模块 </a>
+						id="navbardrop" data-toggle="dropdown">成绩模块 </a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/score/list">全部成绩信息</a> <a
